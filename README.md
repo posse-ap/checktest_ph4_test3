@@ -5,8 +5,8 @@
 本アプリケーションは[Laravel Sail](https://readouble.com/laravel/8.x/ja/sail.html) を利用しています
 
 ## 事前用意
-- Qiitaのトークンを用意する
 - ローカルに Composer をインストールする
+  - [インストール手順](https://getcomposer.org/download/)
 
 ## 準備
 ```
@@ -15,14 +15,11 @@ git clone git@github.com:posse-ap/checktest_ph4_test3.git
 
 // プロジェクトルートへ移動
 cd checktest_ph4_test3
-
-// .env, .env.testingファイルを作成し、設定をコピペする
-cp .env.example .env
-cp .env.example .env.testing
 ```
 
 コンテナを起動するのですが、本アプリケーションはLaravel Sail を利用しています。
-事前にPCに composer をインストールしておく必要があります。
+また、事前にPCに [Composer をインストール](https://getcomposer.org/download/)しておく必要があります。
+Composer のインストールが済んだら以下の手順に進んでください。
 ```
 composer install
 vendor/bin/sail up -d
@@ -40,7 +37,7 @@ vendor/bin/sail stop
 ### 問1 外部APIを使ってみる
 
 1. App\Http\Controllers\Api\V1\StarWarsControllerの__invokeを実装する
-    - https://swapi.dev/api/films/1 に GET リクエストを送り、レスポンスを受け取る処理を記述してください。また、外部APIにリクエストを送信する処理は [Guzzle](https://readouble.com/laravel/8.x/ja/http-client.html) を利用してください
+    - https://swapi.dev/api/films/1 に GET リクエストを送り、レスポンスを受け取る処理を記述してください。また、外部APIにリクエストを送信する処理は [Guzzle](https://readouble.com/laravel/8.x/ja/http-client.html) を利用してください。
 2. StarWarsControllerに関するテストを流してみる
 
 
@@ -71,7 +68,7 @@ test_get_request内に以下を確認するテストを書いてください
 2. http://localhost/api/api/v1/qiita/articles にリクエストを送信する
 3. レスポンスステータスが期待通り（201）であること
 4. レスポンスが期待通りであること
-5. qiita_articles テーブルのレコードにX件登録されていること
+5. qiita_articles テーブルのレコードに2件登録されていること
 
 **確認方法**
 

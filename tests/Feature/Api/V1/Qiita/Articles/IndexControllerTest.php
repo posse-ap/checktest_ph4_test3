@@ -28,7 +28,7 @@ class IndexControllerTest extends TestCase
         // 2. http://localhost/api/api/v1/qiita/articles にリクエストを送信する
         // 3. レスポンスステータスが期待通り（201）であること
         // 4. レスポンスが期待通りであること
-        // 5. qiita_articles テーブルのレコードにX件登録されていること
+        // 5. qiita_articles テーブルのレコードに2件登録されていること
     }
 
     public function test_return_value_when_request_success()
