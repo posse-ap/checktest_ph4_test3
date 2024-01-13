@@ -18,6 +18,8 @@ $ cd checktest_ph4_test3
 ```shell
 $ docker compose build --no-cache
 $ docker compose up -d
+$ docker compose exec app bash
+$ composer install
 ```
 
 http://localhost/ にアクセスするとLaravelの画面が表示されます。
@@ -26,7 +28,7 @@ http://localhost/ にアクセスするとLaravelの画面が表示されます�
 ### php artisan系のコマンドを実行したい場合は以下の方法で実行してください
 ```shell
 $ docker compose exec app bash
-$ php artisan route:list
+$ php artisan migrate
 ```
 
 ### コンテナを停止したい場合は以下のコマンドを実施
@@ -57,16 +59,20 @@ $ php artisan test tests/Feature/Api/V1/StarWarsControllerTest.php
 1. App\Services\GetQiitaArticles.phpを確認し、TODOコメント部分を実装してください。
     - base urlはL13行目に定義しているので、文字列連結して使ってください（ex: self::QIITA_BASE_URL . $qiita_url_path）
     - リクエストヘッダーには QiitaAPI の token をセットしてください
+    - .envに記述されているQIITA_TOKENを利用してください
 2. $statusがddで200になっていることを確認
 
 **確認方法**
-http://localhost/api/api/v1/qiita/articles にアクセスして、画面に「200」と表示されれば成功です。
+
+- [ ] http://localhost/api/api/v1/qiita/articles にアクセス、画面に「200」と表示で合格です。
 
 
 ### 問3 api/api/v1/qiita/articlesのテストを書こう
 
 tests/Feature/Api/V1/Qiita/Articles/IndexControllerTest.phpをご確認ください
 test_get_request内に以下を確認するテストを書いてください
+
+問2の確認が合格している前提の問題になっています
 
 1. qiita_articles テーブルのレコードが0件であること
 2. http://localhost/api/api/v1/qiita/articles にリクエストを送信する
@@ -76,7 +82,7 @@ test_get_request内に以下を確認するテストを書いてください
 
 **確認方法**
 
-- [ ] テストが通っていれば合格です。
+- [ ] ｢Tests: 1 passed」テストが通っていれば合格です。
 
 ```shell
 $ php artisan test tests/Feature/Api/V1/Qiita/Articles/IndexControllerTest.php --filter "test_get_request"

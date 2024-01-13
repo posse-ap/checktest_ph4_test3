@@ -2,9 +2,7 @@
 
 namespace Tests\Feature\Api\V1\Qiita\Articles;
 
-use App\Models\QiitaArticle;
 use App\Services\GetQiitaArticles;
-use Exception;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;

@@ -29,9 +29,12 @@ class GetQiitaArticles implements GetQiitaArticlesInterface
      */
     public function execute(string $qiita_url_path = 'authenticated_user/items'): void
     {
-        # TODO 問2: 以下のリンク先にあるapiを呼び出してQiita記事を取得してください
+        # TODO 問2: QIITA_BASE_URLと引数のqiita_url_pathを文字列連結してQiita記事を取得してください
         $response = '';
         $status = $response->status();
+        // 問2の確認時にコメントアウトを外してください
+        // dd($status);
+
 
         if ($status === Response::HTTP_OK) {
             $this->create_qiita_article->execute(collect($response->json()));
@@ -41,4 +44,3 @@ class GetQiitaArticles implements GetQiitaArticlesInterface
     }
 
 }
-
