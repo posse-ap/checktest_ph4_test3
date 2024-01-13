@@ -1,35 +1,37 @@
-# チェックテスト(v1.0.0)
-
-## 前提
-
-本アプリケーションは[Laravel Sail](https://readouble.com/laravel/8.x/ja/sail.html) を利用しています
-
-## 事前用意
-- ローカルに Composer をインストールする
-  - [インストール手順](https://getcomposer.org/download/)
+# チェックテスト(v2.0.0)
 
 ## 準備
-```
-// ソースコードをクローンする
-git clone git@github.com:posse-ap/checktest_ph4_test3.git
 
-// プロジェクトルートへ移動
-cd checktest_ph4_test3
+コマンドをコピーして実行する場合は、`$` は含めないでください
+
+### ソースコードをクローンする
+```shell
+$ git clone git@github.com:posse-ap/checktest_ph4_test3.git
 ```
 
-コンテナを起動するのですが、本アプリケーションはLaravel Sail を利用しています。
-また、事前にPCに [Composer をインストール](https://getcomposer.org/download/)しておく必要があります。
-Composer のインストールが済んだら以下の手順に進んでください。
+### プロジェクトルートへ移動
+```shell
+$ cd checktest_ph4_test3
 ```
-composer install
-vendor/bin/sail up -d
+
+### 環境構築
+```shell
+$ docker compose build --no-cache
+$ docker compose up -d
 ```
 
 http://localhost/ にアクセスするとLaravelの画面が表示されます。
 
-コンテナを停止したい場合は以下のコマンドを実施
+
+### php artisan系のコマンドを実行したい場合は以下の方法で実行してください
+```shell
+$ docker compose exec app bash
+$ php artisan route:list
 ```
-vendor/bin/sail stop
+
+### コンテナを停止したい場合は以下のコマンドを実施
+```shell
+$ docker compose stop
 ```
 
 ## 問題
@@ -37,15 +39,17 @@ vendor/bin/sail stop
 ### 問1 外部APIを使ってみる
 
 1. App\Http\Controllers\Api\V1\StarWarsControllerの__invokeを実装する
-    - https://swapi.dev/api/films/1 に GET リクエストを送り、レスポンスを受け取る処理を記述してください。また、外部APIにリクエストを送信する処理は [Guzzle](https://readouble.com/laravel/8.x/ja/http-client.html) を利用してください。
+    - https://swapi.dev/api/films/1 に GET リクエストを送り、レスポンスを受け取る処理を記述してください。また、外部APIにリクエストを送信する処理は [Guzzle](https://readouble.com/laravel/10.x/ja/http-client.html) を利用してください。
 2. StarWarsControllerに関するテストを流してみる
 
 
 **確認方法**
 
-テストが通れば合っています。以下、テストコマンド（コンテナが起動している必要があります）
-```
-vendor/bin/sail test tests/Feature/Api/V1/StarWarsControllerTest.php
+- [ ] テストコマンドを実行して「Tests: 1 passed」という風にテストが通っていれば合格です。
+
+### テストコマンド
+```shell
+$ php artisan test tests/Feature/Api/V1/StarWarsControllerTest.php
 ```
 
 ### 問2 外部APIを使ってみる(2)
@@ -72,9 +76,10 @@ test_get_request内に以下を確認するテストを書いてください
 
 **確認方法**
 
-テストが通れば合っています。以下、テストコマンド（コンテナが起動している必要があります）
-```
-vendor/bin/sail test tests/Feature/Api/V1/Qiita/Articles/IndexControllerTest.php --filter "test_get_request"
+- [ ] テストが通っていれば合格です。
+
+```shell
+$ php artisan test tests/Feature/Api/V1/Qiita/Articles/IndexControllerTest.php --filter "test_get_request"
 ```
 
 ### 問4 FeatureテストをMockeryを使って書いてみよう
@@ -90,9 +95,10 @@ App\Http\Controllers\Api\V1\Qiita\Articles\IndexControllerの `$this->getQiitaAr
 
 **確認方法**
 
-テストが通れば合っています。以下、テストコマンド（コンテナが起動している必要があります）
-```
-vendor/bin/sail test tests/Feature/Api/V1/Qiita/Articles/IndexControllerTest.php --filter "test_return_value_when_request_failed"
+- [ ] テストが通っていれば合格です。
+
+```shell
+$ php artisan test tests/Feature/Api/V1/Qiita/Articles/IndexControllerTest.php --filter "test_return_value_when_request_failed"
 ```
 
 ### 問5 CreateQiitaArticlesのテストを書こう
@@ -104,11 +110,15 @@ Tests\Unit\Repositories\CreateQiitaArticlesTest.phpを確認してください
 
 **確認方法**
 
-テストが通れば合っています。以下、テストコマンド（コンテナが起動している必要があります）
-```
-vendor/bin/sail test tests/Unit/Repositories/CreateQiitaArticlesTest.php --filter "test_empty_collection_given"
+- [ ] テストが通っていれば合格です。
 
-vendor/bin/sail test tests/Unit/Repositories/CreateQiitaArticlesTest.php --filter "test_not_empty_collection_given"
+```shell
+$ php artisan test tests/Unit/Repositories/CreateQiitaArticlesTest.php --filter "test_empty_collection_given"
+```
+- [ ] テストが通っていれば合格です。
+
+```shell
+$ php test tests/Unit/Repositories/CreateQiitaArticlesTest.php --filter "test_not_empty_collection_given"
 ```
 
 

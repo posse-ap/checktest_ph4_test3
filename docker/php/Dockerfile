@@ -5,7 +5,7 @@ COPY php.ini /usr/local/etc/php/
 RUN apt-get update && apt-get install -y \
   libzip-dev \
   zlib1g-dev \
-  default-mysql-client \
+  mariadb-client \
   unzip \
   curl \
   && docker-php-ext-install zip
@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get install -y vim \
   && docker-php-ext-install zip pdo_mysql sockets
 
-# Composer2.0 install
+# Composer2.X install
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN composer self-update --2
 ENV COMPOSER_ALLOW_SUPERUSER 1

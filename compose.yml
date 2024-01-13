@@ -22,8 +22,8 @@ services:
       - ./docker/mysql/config:/etc/mysql/conf.d
       - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d
     environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=website
+      - MYSQL_DATABASE=test_example
       - MYSQL_USER=posse
       - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=password
       - TZ=Asia/Tokyo
